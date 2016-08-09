@@ -220,10 +220,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 
 - (id<JSQMessagesBubbleSizeCalculating>)bubbleSizeCalculator
 {
-    if (_bubbleSizeCalculator == nil) {
-        _bubbleSizeCalculator = [JSQMessagesBubblesSizeCalculator new];
-    }
-
+    _bubbleSizeCalculator = [JSQMessagesBubblesSizeCalculator new];
+    
     return _bubbleSizeCalculator;
 }
 
@@ -406,7 +404,7 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
 {
     id<JSQMessageData> messageItem = [self.collectionView.dataSource collectionView:self.collectionView
                                                       messageDataForItemAtIndexPath:indexPath];
-
+    
     return [self.bubbleSizeCalculator messageBubbleSizeForMessageData:messageItem
                                                           atIndexPath:indexPath
                                                            withLayout:self];
