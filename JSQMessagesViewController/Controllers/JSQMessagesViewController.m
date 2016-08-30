@@ -281,12 +281,13 @@ JSQMessagesKeyboardControllerDelegate>
     [self.view layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
 
-    if (self.automaticallyScrollsToMostRecentMessage) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self scrollToBottomAnimated:NO];
-            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-        });
-    }
+    // no need to scroll to bottom everytime chat will appear (e.q pop/dismiss)
+//    if (self.automaticallyScrollsToMostRecentMessage) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self scrollToBottomAnimated:NO];
+//            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+//        });
+//    }
 
     [self jsq_updateKeyboardTriggerPoint];
 }
