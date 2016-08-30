@@ -269,6 +269,13 @@ JSQMessagesKeyboardControllerDelegate>
 
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
+    
+    if (self.automaticallyScrollsToMostRecentMessage) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self scrollToBottomAnimated:NO];
+            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+        });
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -282,12 +289,6 @@ JSQMessagesKeyboardControllerDelegate>
     [self.collectionView.collectionViewLayout invalidateLayout];
 
     // no need to scroll to bottom everytime chat will appear (e.q pop/dismiss)
-//    if (self.automaticallyScrollsToMostRecentMessage) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self scrollToBottomAnimated:NO];
-//            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
-//        });
-//    }
 
     [self jsq_updateKeyboardTriggerPoint];
 }
